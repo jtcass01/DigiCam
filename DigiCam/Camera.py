@@ -95,7 +95,7 @@ class Camera(object):
         # Build image name
         image_name = self.collection_name + "_" + str(self.image_index) + self.image_type
         # Command Camera
-        system(self.control_cmd_location + " /filename "  +  self.save_folder + image_name +  " " + command)
+        system('\"' + self.control_cmd_location + "\" /filename "  +  self.save_folder + image_name +  " " + command)
 
     def run_script(self, script_name: str) -> None:
         """Runs the passed script within the script location.

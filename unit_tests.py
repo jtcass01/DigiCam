@@ -11,7 +11,6 @@ from DigiCam.Camera import Camera
 # Update with the path to your CameraControlCmd.exe file.  This is likely found within digiCamControl which is likely within one of your program directories.
 CAMERA_CONTROL_CMD_PATH = join('C:' + sep, 'Program Files (x86)', 'digiCamControl', 'CameraControlCmd.exe')
 
-
 class TestDigiCamControl(TestCase):
     """[summary]"""
     def test_camera_initialization(self) -> None:
@@ -25,7 +24,6 @@ class TestDigiCamControl(TestCase):
 
         test_camera.setup(aperture='2.8', exposure_control='1', shutter_speed='1', iso='AUTO')
 
-    @skip # Skipped by default because a camera must be connected for this test to pass.
     def test_capture(self) -> None:
         """[summary]"""
         test_camera = Camera(control_cmd_location=CAMERA_CONTROL_CMD_PATH)
