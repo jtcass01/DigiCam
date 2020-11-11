@@ -2,7 +2,7 @@
 A python library for controlling DSLR cameras using the open source program DigiCamControl. Please see: [http://digicamcontrol.com/](http://digicamcontrol.com/) for more information.
 
 ## Installing digiCamControl
-digiCamControl can be downloaded [here](http://digicamcontrol.com/download).  Please selected 'digiCamControl Stable Version'.
+digiCamControl can be downloaded [here](http://digicamcontrol.com/download).  Please select 'digiCamControl Stable Version'.
 
 ## Installing DigiCam
 Download the DigiCam source code from [here](https://github.com/jtcass01/DigiCam) or using the following git system call.
