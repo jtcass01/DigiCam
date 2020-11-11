@@ -16,12 +16,15 @@ Locate the DigiCam directory.  Run build.py from this directory with the followi
 python build.py
 ```
 
-## Building a Camera Class Object in Python
+## Simple Usage Example
+Note: digiCamControl should locate the cpu port connected to a camera automatically.
 ```python
 from DigiCam.Camera import Camera
 
 # Replace the below path with the absolute or relative path to your CameraControlCmd executable.
 camera_control_cmd_path = 'C:\\Program Files (x86)\\digiCamControl\\CameraControlCmd.exe'
 
-Camera(control_cmd_location=camera_control_cmd_path)
+test_camera = Camera(control_cmd_location=camera_control_cmd_path)
+
+test_camera.capture_single_image(autofocus=True)
 ```
