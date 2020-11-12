@@ -62,10 +62,10 @@ class Camera(object):
                     "iso" : iso}
 
         # Enforce directory location
-        FileSystem.enforce_path(self.script_location)
+        FileSystem.enforce_path(setup_script_name)
 
         # Generate the setup script at the script location with the given setup_script_name
-        with open(self.script_location + setup_script_name, "w+") as file:
+        with open(setup_script_name, "w+") as file:
             file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
             file.write("<dccscript>\n")
             file.write(" "*2 + "<commands>\n")
@@ -102,11 +102,8 @@ class Camera(object):
 
         Args:
             script_name (str): [description]"""
-        # Enforce directory location
-        FileSystem.enforce_path(self.script_location)
-
         # Make call to operating system
-        system(self.control_cmd_location + " " + self.script_location + script_name)
+        system(self.control_cmd_location + " " + script_name)
 
     @staticmethod
     def set_image_type(image_type: Union[str, None] = None) -> str:
