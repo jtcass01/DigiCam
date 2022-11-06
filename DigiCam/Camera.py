@@ -39,11 +39,8 @@ class Camera:
         """Drives the setup of the camera given a set of settings.  Autocodes the setup script and runs it.
 
         Args:
-            aperture (Optional[str], optional): [description]. Defaults to None.
-            exposure_control (Optional[str], optional): [description]. Defaults to None.
-            shutter_speed (Optional[str], optional): [description]. Defaults to None.
-            iso (Union[int, str, None], optional): [description]. Defaults to None.
-            setup_script_name (str, optional): [description]. Defaults to "setup.dccscript"."""
+            settings (Camera.Settings): _description_
+            setup_script_name (str, optional): _description_. Defaults to 'setup.dccscript'."""
         self.generate_setup_script(settings=settings, setup_script_name=setup_script_name)
         self.run_script(script_name=setup_script_name)
 
@@ -51,11 +48,8 @@ class Camera:
         """Generates the setup script to set the aperture, exposure_control, shutter_speed, and iso of the camera if any of these values are passed.
 
         Args:
-            setup_script_name (str): [description]
-            aperture (Union[str, None], optional): [description]. Defaults to None.
-            exposure_control (Union[str, None], optional): [description]. Defaults to None.
-            shutter_speed (Union[str, None], optional): [description]. Defaults to None.
-            iso (Union[int, str, None], optional): [description]. Defaults to None."""
+            settings (Camera.Settings): _description_
+            setup_script_name (str): _description_"""
         # Enforce directory location
         FileSystem.enforce_path(setup_script_name)
 
@@ -73,7 +67,7 @@ class Camera:
 
         Args:
             file (IO): [description]
-            settings (dict): [description]"""
+            settings (Camera.Settings): [description]"""
         # Write each setting in the settings dictionary to the file as long as the setting is not None
         for setting_name, setting in dict(settings).items():
             if setting is not None:
@@ -150,7 +144,7 @@ class Camera:
         def __init__(self, aperture: Optional[str] = None,
                      exposure_control: Optional[str] = None,
                      shutter_speed: Optional[str] = None,
-                     iso: Union[int, str, None] = None) -> None:
+                     iso: Optional[Union[int, str]] = None) -> None:
             self.aperture: Optional[str] = aperture
             self.exposure_control: Optional[str] = exposure_control
             self.shutter_speed: Optional[str] = shutter_speed
