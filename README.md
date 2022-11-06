@@ -8,7 +8,7 @@
   <h3 align="center">DigiCam</h3>
 
   <p align="center">
-    A python library for controlling DSLR cameras using the open source program DigiCamControl. Please see: [http://digicamcontrol.com/](http://digicamcontrol.com/) for more information.
+    A python library for controlling DSLR cameras using the open source program DigiCamControl. Please see: <a href="http://digicamcontrol.com/">http://digicamcontrol.com/</a> for more information.
     <br />
     <a href="https://github.com/jtcass01/DigiCam"><strong>Explore the docs �</strong></a>
     <br />
@@ -88,4 +88,4 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 Jacob Taylor Cassady - [@Jacob_Cassady](https://twitter.com/Jacob_Cassady) - jacobtaylorcassady@outlook.com
 
-Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/DigiCam)
+Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/StepperMotor)
