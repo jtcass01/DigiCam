@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """unit_tests.py:"""
 
-__author__ = "Jacob Taylor Cassady"
-__email__ = "jacobtaylorcassady@outlook.com"
+__author__ = 'Jacob Taylor Cassady'
+__email__ = 'jacobtaylorcassady@outlook.com'
 
 from unittest import TestCase, main, skip
 from os.path import join, sep
@@ -33,5 +33,5 @@ class TestDigiCamControl(TestCase):
         test_camera.capture_single_image(autofocus=True)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

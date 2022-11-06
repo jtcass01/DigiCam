@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-"""Camera.py:"""
+"""Camera.py: """
 from __future__ import annotations
 
-__author__ = "Jacob Taylor Cassady"
-__email__ = "jacobtaylorcassady@outlook.com"
+__author__ = 'Jacob Taylor Cassady'
+__email__ = 'jacobtaylorcassady@outlook.com'
 
 from os import system, getcwd
 from os.path import isfile
@@ -14,17 +14,17 @@ from DigiCam.FileSystem import FileSystem
 
 class Camera:
     """Camera class object.  Used to control a DSLR camera using digiCamControl's command line interface."""
-    def __init__(self, control_cmd_location: str, image_type: Optional[str] = None, 
-                 collection_name: str = "", save_folder: str = getcwd()):
+    def __init__(self, control_cmd_location: str, image_type: Optional[str] = None,
+                 collection_name: str = '', save_folder: str = getcwd()):
         """Constructor.
 
         Args:
-            control_cmd_location (str): The absolute or relative path to CameraControlCmd.exe.  
+            control_cmd_location (str): The absolute or relative path to CameraControlCmd.exe.
                                         If using a Windows OS is likely held within ProgramFiles\\digiCamControl\\.
             image_type (Optional[str], optional): A string representing the image type to be captured.  Defaults to '.CR2' when None is passed.
             collection_name (str, optional): A string to be appended to the front of ever image taken. Defaults to "".
             save_folder (str, optional): The absolute or relative path to the directory where images are to be saved. Defaults to getcwd()."""
-        assert isfile(control_cmd_location), "Unable to locate: " + control_cmd_location \
+        assert isfile(control_cmd_location), 'Unable to locate: ' + control_cmd_location \
             + '. Please ensure this is the correct path to CameraControlCmd.exe. ' \
             + 'It is likely held within Program Files\\digiCamControl\\'
 
@@ -35,7 +35,7 @@ class Camera:
         self.collection_name = collection_name
         self.save_folder = save_folder
 
-    def setup(self, settings: Camera.Settings, setup_script_name: str = "setup.dccscript"):
+    def setup(self, settings: Camera.Settings, setup_script_name: str = 'setup.dccscript'):
         """Drives the setup of the camera given a set of settings.  Autocodes the setup script and runs it.
 
         Args:
@@ -60,13 +60,13 @@ class Camera:
         FileSystem.enforce_path(setup_script_name)
 
         # Generate the setup script at the script location with the given setup_script_name
-        with open(setup_script_name, "w+", encoding='utf-8') as file:
+        with open(setup_script_name, 'w+', encoding='utf-8') as file:
             file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-            file.write("<dccscript>\n")
-            file.write(" "*2 + "<commands>\n")
+            file.write('<dccscript>\n')
+            file.write(' '*2 + '<commands>\n')
             self.write_settings(file=file, settings=settings)
-            file.write(" "*2 + "</commands>\n")
-            file.write("</dccscript>")
+            file.write(' '*2 + '</commands>\n')
+            file.write('</dccscript>')
 
     def write_settings(self, file: IO, settings: Camera.Settings) -> None:
         """Writes the passed dictionary of settings to the passed file.  If a setting has a value of None, it is passed over.
@@ -77,7 +77,7 @@ class Camera:
         # Write each setting in the settings dictionary to the file as long as the setting is not None
         for setting_name, setting in dict(settings).items():
             if setting is not None:
-                file.write(" "*3 + f"<setcamera property=\"{setting_name}\" value=\"{setting}\"/>\n")
+                file.write(' '*3 + f"<setcamera property=\"{setting_name}\" value=\"{setting}\"/>\n")
 
     def command_camera(self, command: str) -> None:
         """Creates a call to the camera using DigiCamControl
@@ -88,7 +88,7 @@ class Camera:
         FileSystem.enforce_path(self.save_folder)
 
         # Build image name
-        image_name = self.collection_name + "_" + str(self.image_index) + self.image_type
+        image_name = self.collection_name + '_' + str(self.image_index) + self.image_type
         # Command Camera
         system(f'\"{self.control_cmd_location}\" /filename {self.save_folder}{image_name} {command}')
 
@@ -109,19 +109,19 @@ class Camera:
 
         Returns:
             str: A string representing the image type.  If none is given, the default .jpg is used."""
-        if image_type in ["jpeg", "jpg"]:
-            return ".jpg"
+        if image_type in ['jpeg', 'jpg']:
+            return '.jpg'
 
         if image_type == 'raw':
-            return ".RAW"
-        
+            return '.RAW'
+
         if image_type == 'png':
-            return ".png"
-        
+            return '.png'
+
         if image_type == '.CR2':
             return 'CR2'
-        
-        return ".jpg"
+
+        return '.jpg'
 
     def capture_single_image(self, autofocus: bool = False) -> None:
         """Captures a single image.  Iterates the image index to ensure a unique name for each image taken.
@@ -130,9 +130,9 @@ class Camera:
             autofocus (bool, optional): [description]. Defaults to False."""
         # Make the correct camera command depending on autofocus being enabled.
         if autofocus:
-            self.command_camera("/capture")
+            self.command_camera('/capture')
         else:
-            self.command_camera("/capturenoaf")
+            self.command_camera('/capturenoaf')
 
         # Increment the image index
         self.image_index += 1
@@ -147,8 +147,8 @@ class Camera:
             self.capture_single_image()
 
     class Settings:
-        def __init__(self, aperture: Optional[str] = None, 
-                     exposure_control: Optional[str] = None, 
+        def __init__(self, aperture: Optional[str] = None,
+                     exposure_control: Optional[str] = None,
                      shutter_speed: Optional[str] = None,
                      iso: Union[int, str, None] = None) -> None:
             self.aperture: Optional[str] = aperture
@@ -157,11 +157,11 @@ class Camera:
             self.iso: Optional[str] = iso
 
         def __dict__(self) -> Dict[str, Union[None, str, int]]:
-            return {"aperature": self.aperture,
-                    "ec": self.exposure_control,
-                    "shutter": self.shutter_speed,
-                    "iso": self.iso}
+            return {'aperature': self.aperture,
+                    'ec': self.exposure_control,
+                    'shutter': self.shutter_speed,
+                    'iso': self.iso}
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     pass

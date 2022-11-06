@@ -1,17 +1,17 @@
 #/usr/bin/env python
 """setup.py Installs DigiCam Python Library"""
 
-__author__ = "Jacob Taylor Cassady"
-__email__ = "jacobtaylorcassady@outlook.com"
+__author__ = 'Jacob Taylor Cassady'
+__email__ = 'jacobtaylorcassady@outlook.com'
 
 from setuptools import setup, find_packages
 
-if __name__ == "__main__":
-    with open("README.md", 'r') as fh:
+if __name__ == '__main__':
+    with open('README.md', 'r', encoding='utf-8') as fh:
         long_description = fh.read()
 
     setup(
-        name="DigiCam",
+        name='DigiCam',
         version='0.1',
         author=__author__,
         author_email=__email__,

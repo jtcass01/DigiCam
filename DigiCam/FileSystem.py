@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """FileSystem.py: Module containing a wrapper class for accessing and modifying directories and files."""
 
-__author__ = "Jacob Taylor Cassady"
-__email__ = "jacobtaylorcassady@outlook.com"
+__author__ = 'Jacob Taylor Cassady'
+__email__ = 'jacobtaylorcassady@outlook.com'
 
 from os.path import isdir, exists, join
 from shutil import rmtree
@@ -64,24 +64,24 @@ class FileSystem():
             data (Any): [description]
             file_name (str): [description]"""
         try:
-            with open(file_name, "a+", encoding='utf-8') as file:
-                file.write(f"{data}\n")
+            with open(file_name, 'a+', encoding='utf-8') as file:
+                file.write(f'{data}\n')
         except PermissionError:
-            print("Permission error when accessing file: " + file_name)
+            print('Permission error when accessing file: ' + file_name)
 
     @staticmethod
-    def log_by_timestamp(data: Any, file_name: str, timestamp_delimiter: str = "\t"):
+    def log_by_timestamp(data: Any, file_name: str, timestamp_delimiter: str = '\t'):
         """Timestamps data and logs it to the file_name.
 
         Args:
             data (Any): [description]
             file_name (str): [description]
             timestamp_delimiter (str, optional): [description]. Defaults to "\t"."""
-        FileSystem.log(data=f"{datetime.now()}{timestamp_delimiter}{data}", file_name=file_name)
+        FileSystem.log(data=f'{datetime.now()}{timestamp_delimiter}{data}', file_name=file_name)
 
     @staticmethod
     def move_files(source_dir: str, destination_dir: str, new_name: Union[str, None] = None) -> None:
-        """Moves all files from a source directory into a destination directory.  If new_name is not None, the files are 
+        """Moves all files from a source directory into a destination directory.  If new_name is not None, the files are
            renamed and enumerated using the new_name.  If new_name is None, the files keep their original name.
 
         Args:
@@ -105,7 +105,7 @@ class FileSystem():
             if new_name is None:
                 rename(source_dir + file, destination_dir + file)
             else:
-                rename(source_dir + file, destination_dir + new_name + str(index + initial_index) + ".bin")
+                rename(source_dir + file, destination_dir + new_name + str(index + initial_index) + '.bin')
 
     @staticmethod
     def start_log(data: Any, file_name: str) -> None:
@@ -114,8 +114,8 @@ class FileSystem():
         Args:
             data (Any): [description]
             file_name (str): [description]"""
-        with open(file_name, "w+", encoding='utf-8') as file:
-            file.write(f"{data}\n")
+        with open(file_name, 'w+', encoding='utf-8') as file:
+            file.write(f'{data}\n')
 
     @staticmethod
     def enforce_path(purposed_path: str) -> None:
@@ -135,7 +135,7 @@ class FileSystem():
             rmtree(directory)
 
     @staticmethod
-    def log_error(error: Union[Exception, str], file_name: str, timestamp_delimiter="\t") -> None:
+    def log_error(error: Union[Exception, str], file_name: str, timestamp_delimiter='\t') -> None:
         """Logs an error with a timestamp using a given delimeter and file_name
 
         Args:
@@ -156,6 +156,6 @@ class FileSystem():
         # Enforce the directory path
         FileSystem.enforce_path(purposed_path=directory_location)
         # Start the log with the correct delimeter information at the top
-        FileSystem.start_log(data=f"sep={delimeter}", file_name=join(directory_location,file_name))
+        FileSystem.start_log(data=f'sep={delimeter}', file_name=join(directory_location,file_name))
         # Add the column headers to the log.
         FileSystem.log(data=delimeter.join(column_headers), file_name=join(directory_location,file_name))
