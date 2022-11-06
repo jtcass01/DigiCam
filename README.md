@@ -38,10 +38,10 @@
   </ol>
 </details>
 
-## Installing digiCamControl
+## Install digiCamControl
 digiCamControl can be downloaded [here](http://digicamcontrol.com/download).  Please select 'digiCamControl Stable Version'.
 
-## Installing DigiCam
+## Install DigiCam
 Download the DigiCam source code from [here](https://github.com/jtcass01/DigiCam) or using the following git system call.
 ```bash
 git clone https://github.com/jtcass01/DigiCam.git
