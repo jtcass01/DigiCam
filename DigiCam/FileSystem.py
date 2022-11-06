@@ -4,7 +4,7 @@
 __author__ = "Jacob Taylor Cassady"
 __email__ = "jacobtaylorcassady@outlook.com"
 
-from os.path import isdir, exists
+from os.path import isdir, exists, join
 from shutil import rmtree
 from os import walk, rename, makedirs
 from typing import Union, Any
@@ -27,7 +27,7 @@ class FileSystem():
 
         # If the directory exists, return the set of files found within. Else print a warning that the directory does not exist.
         if isdir(directory_location):
-            for root, dirs, files in walk(directory_location):
+            for _, __, files in walk(directory_location):
                 file_set.append(set(files))
 
         # If no files are found or the directory does not exist, return the empty set.
@@ -53,10 +53,8 @@ class FileSystem():
             # Return the difference cast to a list.  If empty, return an empty list
             if len(new_files) > 0:
                 return list(new_files)
-            else:
-                return list([])
-        else:
-            return list([])
+
+        return []
 
     @staticmethod
     def log(data: Any, file_name: str) -> None:
@@ -66,8 +64,8 @@ class FileSystem():
             data (Any): [description]
             file_name (str): [description]"""
         try:
-            with open(file_name, "a+") as file:
-                file.write(str(data) + "\n")
+            with open(file_name, "a+", encoding='utf-8') as file:
+                file.write(f"{data}\n")
         except PermissionError:
             print("Permission error when accessing file: " + file_name)
 
@@ -79,7 +77,7 @@ class FileSystem():
             data (Any): [description]
             file_name (str): [description]
             timestamp_delimiter (str, optional): [description]. Defaults to "\t"."""
-        FileSystem.log(data=str(datetime.now()) + timestamp_delimiter + str(data), file_name=file_name)
+        FileSystem.log(data=f"{datetime.now()}{timestamp_delimiter}{data}", file_name=file_name)
 
     @staticmethod
     def move_files(source_dir: str, destination_dir: str, new_name: Union[str, None] = None) -> None:
@@ -94,12 +92,12 @@ class FileSystem():
         initial_index = 0
 
         # Set the initial index to the length of files within the destination directory
-        for root, dirs, files in walk(destination_dir):
+        for _, __, files in walk(destination_dir):
             initial_index = len(files)
 
         # Get a list of source files.
         source_files = list([])
-        for root, dirs, files in walk(source_dir):
+        for _, __, files in walk(source_dir):
             source_files = files
 
         # Move and rename source files to the destination directory.
@@ -116,8 +114,8 @@ class FileSystem():
         Args:
             data (Any): [description]
             file_name (str): [description]"""
-        with open(file_name, "w+") as file:
-            file.write(str(data) + "\n")
+        with open(file_name, "w+", encoding='utf-8') as file:
+            file.write(f"{data}\n")
 
     @staticmethod
     def enforce_path(purposed_path: str) -> None:
@@ -137,14 +135,14 @@ class FileSystem():
             rmtree(directory)
 
     @staticmethod
-    def log_error(error: Union[Exception, str], file_name: str, timestamp_delimeter="\t") -> None:
+    def log_error(error: Union[Exception, str], file_name: str, timestamp_delimiter="\t") -> None:
         """Logs an error with a timestamp using a given delimeter and file_name
 
         Args:
             error (Union[Exception, str]): [description]
             file_name (str): [description]
-            timestamp_delimeter (str, optional): [description]. Defaults to "\t"."""
-        FileSystem.log_by_timestamp(data=error, timestamp_delimeter=timestamp_delimeter, file_name=file_name)
+            timestamp_delimiter (str, optional): [description]. Defaults to "\t"."""
+        FileSystem.log_by_timestamp(data=error, timestamp_delimiter=timestamp_delimiter, file_name=file_name)
 
     @staticmethod
     def initialize_csv(directory_location: str, file_name: str, column_headers: list, delimeter: str) -> None:
@@ -158,6 +156,6 @@ class FileSystem():
         # Enforce the directory path
         FileSystem.enforce_path(purposed_path=directory_location)
         # Start the log with the correct delimeter information at the top
-        FileSystem.start_log(data="sep=" + delimeter, file_name=directory_location+file_name)
+        FileSystem.start_log(data=f"sep={delimeter}", file_name=join(directory_location,file_name))
         # Add the column headers to the log.
-        FileSystem.log(data=delimeter.join(column_headers), file_name=directory_location+file_name)
+        FileSystem.log(data=delimeter.join(column_headers), file_name=join(directory_location,file_name))

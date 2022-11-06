@@ -21,8 +21,10 @@ class TestDigiCamControl(TestCase):
     def test_setup(self) -> None:
         """[summary]"""
         test_camera = Camera(control_cmd_location=CAMERA_CONTROL_CMD_PATH)
+        test_setting: Camera.Settings = Camera.Settings(aperture='2.8', exposure_control='1',
+                                                        shutter_speed='1', iso='AUTO')
 
-        test_camera.setup(aperture='2.8', exposure_control='1', shutter_speed='1', iso='AUTO')
+        test_camera.setup(test_setting)
 
     def test_capture(self) -> None:
         """[summary]"""
