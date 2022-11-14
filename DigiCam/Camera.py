@@ -5,11 +5,9 @@ from __future__ import annotations
 __author__ = 'Jacob Taylor Cassady'
 __email__ = 'jacobtaylorcassady@outlook.com'
 
-from os import system, getcwd
+from os import system, getcwd, makedirs
 from os.path import isfile
 from typing import Union, IO, Optional, Dict
-
-from DigiCam.FileSystem import FileSystem
 
 
 class Camera:
@@ -50,9 +48,6 @@ class Camera:
         Args:
             settings (Camera.Settings): _description_
             setup_script_name (str): _description_"""
-        # Enforce directory location
-        FileSystem.enforce_path(setup_script_name)
-
         # Generate the setup script at the script location with the given setup_script_name
         with open(setup_script_name, 'w+', encoding='utf-8') as file:
             file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
@@ -79,7 +74,7 @@ class Camera:
         Args:
             command (str): [description]"""
         # Enforce directory location
-        FileSystem.enforce_path(self.save_folder)
+        makedirs(self.save_folder, exist_ok=True)
 
         # Build image name
         image_name = self.collection_name + '_' + str(self.image_index) + self.image_type
