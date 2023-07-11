@@ -19,6 +19,7 @@ __email__ = 'jacobtaylorcassady@outlook.com'
 
 from os import system, getcwd, makedirs
 from os.path import isfile
+from time import sleep
 from typing import Union, IO, Optional, Dict
 
 
@@ -168,15 +169,21 @@ class Camera:
         # Increment the image index
         self.image_index += 1
 
-    def capture_multiple_images(self, image_count: int):
+    def capture_multiple_images(self, image_count: int, frequency: float = 1.0):
         """Captures an n number of images by repeatedly calling the capture_single_image
         function n times where n is the parameter image_count.
 
         Args:
-            image_count (int): Specifies the number of images to be captured."""
+            image_count (int): Specifies the number of images to be captured.
+
+            frequency (float, optional): The frequency at which images should be captured."""
+        assert frequency > 0, 'frequency must be greater than 0.'
+
         # Iterate over the image_count capturing a single image every time.
         for _ in range(image_count):
             self.capture_single_image()
+
+            sleep(1/frequency)
 
     class Settings:
         """A helper class that holds various camera settings, such as aperture,
