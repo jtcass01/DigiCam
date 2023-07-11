@@ -26,9 +26,8 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#install-digicamcontrol">Install digiCamControl</a></li>
-        <li><a href="#install-digicam">Install DigiCam</a></li>
-        <li><a href="#building-the-digicam-library">Building the DigiCam Library</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -51,7 +50,6 @@ Download the DigiCam source code from [here](https://github.com/jtcass01/DigiCam
 git clone https://github.com/jtcass01/DigiCam.git
 ```
 
-## Building the DigiCam library
 Locate the DigiCam directory.  Run build.py from this directory with the following system call.
 ```bash
 python build.py
