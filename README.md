@@ -38,10 +38,14 @@
   </ol>
 </details>
 
-## Install digiCamControl
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prequisites
 digiCamControl can be downloaded [here](http://digicamcontrol.com/download).  Please select 'digiCamControl Stable Version'.
 
-## Install DigiCam
+## Installation
 Download the DigiCam source code from [here](https://github.com/jtcass01/DigiCam) or using the following git system call.
 ```bash
 git clone https://github.com/jtcass01/DigiCam.git
@@ -86,6 +90,6 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Jacob Taylor Cassady - [@Jacob_Cassady](https://twitter.com/Jacob_Cassady) - jacobtaylorcassady@outlook.com
+Jacob Taylor Cassady - jacobtaylorcassady@outlook.com
 
-Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/StepperMotor)
+Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/DigiCam)
