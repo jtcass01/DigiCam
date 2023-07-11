@@ -54,7 +54,8 @@ class Camera:
         self.save_folder = save_folder
 
     def setup(self, settings: Camera.Settings, setup_script_name: str = 'setup.dccscript'):
-        """Drives the setup of the camera given a set of settings.  Autocodes the setup script and runs it.
+        """Drives the setup of the camera given a set of settings.  Autocodes the setup
+        script and runs it.
 
         Args:
             settings (Camera.Settings): Each setting from this object is
@@ -67,7 +68,8 @@ class Camera:
         self.run_script(script_name=setup_script_name)
 
     def generate_setup_script(self, settings: Camera.Settings, setup_script_name: str):
-        """Generates the setup script to set the aperture, exposure_control, shutter_speed, and iso of the camera if any of these values are passed.
+        """Generates the setup script to set the aperture, exposure_control, shutter_speed,
+        and iso of the camera if any of these values are passed.
 
         Args:
             settings (Camera.Settings): Each setting from this object is
@@ -86,7 +88,8 @@ class Camera:
             file.write('</dccscript>')
 
     def write_settings(self, file: IO, settings: Camera.Settings) -> None:
-        """Writes the passed dictionary of settings to the passed file.  If a setting has a value of None, it is passed over.
+        """Writes the passed dictionary of settings to the passed file.  If a
+        setting has a value of None, it is passed over.
 
         Args:
             file (IO): Used to write the camera settings into the setup script.
@@ -116,7 +119,8 @@ class Camera:
         """Runs the passed script within the script location.
 
         Args:
-            script_name (str): The name of the script that should be run to configure the camera."""
+            script_name (str): The name of the script that should be run to
+            configure the camera."""
         # Make call to operating system
         system(f'{self.control_cmd_location} {script_name}')
 
@@ -153,8 +157,8 @@ class Camera:
 
         Args:
             autofocus (bool, optional): Determines whether autofocus should be
-                enabled when capturing the image. The default is False, meaning
-                autofocus is not enabled unless specified. Defaults to False."""
+            enabled when capturing the image. The default is False, meaning
+            autofocus is not enabled unless specified. Defaults to False."""
         # Make the correct camera command depending on autofocus being enabled.
         if autofocus:
             self.command_camera('/capture')
@@ -165,7 +169,8 @@ class Camera:
         self.image_index += 1
 
     def capture_multiple_images(self, image_count: int):
-        """Captures an n number of images by repeatedly calling the capture_single_image function n times where n is the parameter image_count.
+        """Captures an n number of images by repeatedly calling the capture_single_image
+        function n times where n is the parameter image_count.
 
         Args:
             image_count (int): Specifies the number of images to be captured."""
