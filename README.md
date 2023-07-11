@@ -26,9 +26,8 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#install-digicamcontrol">Install digiCamControl</a></li>
-        <li><a href="#install-digicam">Install DigiCam</a></li>
-        <li><a href="#building-the-digicam-library">Building the DigiCam Library</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -38,16 +37,19 @@
   </ol>
 </details>
 
-## Install digiCamControl
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prequisites
 digiCamControl can be downloaded [here](http://digicamcontrol.com/download).  Please select 'digiCamControl Stable Version'.
 
-## Install DigiCam
+### Installation
 Download the DigiCam source code from [here](https://github.com/jtcass01/DigiCam) or using the following git system call.
 ```bash
 git clone https://github.com/jtcass01/DigiCam.git
 ```
 
-## Building the DigiCam library
 Locate the DigiCam directory.  Run build.py from this directory with the following system call.
 ```bash
 python build.py
@@ -86,6 +88,6 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Jacob Taylor Cassady - [@Jacob_Cassady](https://twitter.com/Jacob_Cassady) - jacobtaylorcassady@outlook.com
+Jacob Taylor Cassady - jacobtaylorcassady@outlook.com
 
-Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/StepperMotor)
+Project Link: [https://github.com/jtcass01/DigiCam](https://github.com/jtcass01/DigiCam)
