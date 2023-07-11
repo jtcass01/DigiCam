@@ -1,0 +1,12 @@
+.pre-commit-config.yaml
+.prospector.yaml
+LICENSE
+README.md
+build.py
+setup.py
+DigiCam/Camera.py
+DigiCam.egg-info/PKG-INFO
+DigiCam.egg-info/SOURCES.txt
+DigiCam.egg-info/dependency_links.txt
+DigiCam.egg-info/top_level.txt
+test/test_DigicamControl.py
