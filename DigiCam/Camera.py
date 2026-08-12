@@ -18,7 +18,7 @@ __author__ = 'Jacob Taylor Cassady'
 __email__ = 'jacobtaylorcassady@outlook.com'
 
 from os import system, getcwd, makedirs
-from os.path import isfile
+from os.path import isfile, join
 from time import sleep
 from typing import Union, IO, Optional, Dict
 
@@ -98,7 +98,7 @@ class Camera:
             settings (Camera.Settings): Each setting from this object is
             written to the provided file."""
         # Write each setting in the settings dictionary to the file as long as the setting is not None
-        for setting_name, setting in dict(settings).items():
+        for setting_name, setting in settings.to_dict().items():
             if setting is not None:
                 file.write(' '*3 + f"<setcamera property=\"{setting_name}\" value=\"{setting}\"/>\n")
 
@@ -113,8 +113,9 @@ class Camera:
 
         # Build image name
         image_name = self.collection_name + '_' + str(self.image_index) + self.image_type
+        image_path = join(self.save_folder, image_name)
         # Command Camera
-        system(f'\"{self.control_cmd_location}\" /filename {self.save_folder}{image_name} {command}')
+        system(f'\"{self.control_cmd_location}\" /filename \"{image_path}\" {command}')
 
     def run_script(self, script_name: str) -> None:
         """Runs the passed script within the script location.
@@ -123,7 +124,7 @@ class Camera:
             script_name (str): The name of the script that should be run to
             configure the camera."""
         # Make call to operating system
-        system(f'{self.control_cmd_location} {script_name}')
+        system(f'\"{self.control_cmd_location}\" \"{script_name}\"')
 
     @staticmethod
     def set_image_type(image_type: Union[str, None] = None) -> str:
@@ -199,8 +200,9 @@ class Camera:
             self.shutter_speed: Optional[str] = shutter_speed
             self.iso: Optional[str] = iso
 
-        def __dict__(self) -> Dict[str, Union[None, str, int]]:
-            return {'aperature': self.aperture,
+        def to_dict(self) -> Dict[str, Union[None, str, int]]:
+            """Returns the settings keyed by the property names digiCamControl expects."""
+            return {'aperture': self.aperture,
                     'ec': self.exposure_control,
                     'shutter': self.shutter_speed,
                     'iso': self.iso}

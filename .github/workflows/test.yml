@@ -1,0 +1,57 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # digiCamControl is Windows-only, so the hardware-dependent tests only make
+    # sense here. The tests that need a camera attached are skipped by default.
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.7', '3.9', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install package
+      run: |
+        python -m pip install --upgrade pip
+        pip install .
+    - name: Verify the installed package actually contains the code
+      # Run from a scratch directory so the source tree cannot satisfy the
+      # import. This is what regressed when DigiCam/__init__.py was missing.
+      run: |
+        mkdir empty
+        cd empty
+        python -c "from DigiCam import Camera; print(Camera)"
+    - name: Run tests
+      run: python -m unittest discover -s test -v
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    - name: Build distributions
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+        python -m build
+    - name: Check metadata is valid for PyPI
+      run: twine check dist/*
+    - name: Verify the wheel is not empty
+      run: python -c "import zipfile, glob; names = zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist(); assert 'DigiCam/Camera.py' in names, names"
