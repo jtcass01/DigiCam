@@ -1,0 +1,32 @@
+# Byte-compiled / cached
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Testing / linting caches
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+htmlcov/
+
+# digiCamControl artifacts
+*.dccscript
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
